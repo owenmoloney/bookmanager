@@ -1,0 +1,27 @@
+Project details:
+
+design and implement a management system for a book store, we'll use
+pdf instead of real books, makes more sense
+
+what is expected of this system? to manage information about books,
+writers, customers and sales.
+
+expected options:
+
+1_ Manage books:
+    adding new books [ ]
+    displaying list of books [ ]
+    book details: book id, title, writer, price [ ]
+
+2_ Manage writers:
+    publish writer details ( using a separate class, with inheritance ) [ ]
+    display list of writers [ ]
+
+3_ Manage customers:
+    adding new customer [ ]
+    display list of customers [ ]
+
+4_ register and report sales:
+    register info of book sales ( book id, date, number, price ) [ ]
+    display sale report, ( how much a book id sells, total sales ) [ ]
+
