@@ -10,22 +10,26 @@ public:
     string writer;
     unsigned int id;
 
+    void displayBooks();
+    void findBook();
+
 private:
 
 };
 
 class manager: public archive  {
 public:
-    void addBook();
-    void displayBook();
 
 private:
-
+    void addBook();
+    void removeBook();
 };
 
-class writers : public archive {
+
+class writerDetails : public archive {
 public:
 
 private:
-
+    void displayWriters();
+    // read details from file by finding their writername in the file head
 };

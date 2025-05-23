@@ -10,6 +10,7 @@ it meants we start counting from 1.
 ultimately it's a derived class, from a higher one with add book method
 and display book list method.
 
+*unordered_map is vital, it takes id and Book object as input
 
 archive
 |
