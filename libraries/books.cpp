@@ -2,6 +2,8 @@
 #include <string>
 #include <cmath>
 using namespace std;
+
+
 class person{
    protected:
    string name;
@@ -15,6 +17,7 @@ class person{
    void set_wId(int newid);
 };
 
+
 class author : public person{
     private:
     int numberofbooks;
@@ -24,11 +27,15 @@ class author : public person{
     int const getnumberofbooks();
     void setnumberofbooks(int count);
 };
+
+
 class customer : public person{
     public:
     customer();
     customer(string name, int Id);
 };
+
+
 class books{
     private:
     string name;
@@ -41,12 +48,13 @@ class books{
     int const get_book_id();
     int const get_author_id();
     double const get_price();
-
     void set_title(string title);
     void set_book_id(int id);
     void set_author_id(int aid);
     void set_price(double price);
 };
+
+
 class sale : public books{
     public:
     sale();
@@ -55,8 +63,6 @@ class sale : public books{
     int const get_quantity();
     int const get_customerid();
     double const get_price();
-
-
     void set_book_id(int id);
     void set_quantity(int quantity);
     void set_customerid(int id);
