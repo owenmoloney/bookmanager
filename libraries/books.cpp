@@ -9,23 +9,23 @@ class person{
    public:
    person();
    person(string name, int id);
-   virtual person();
-   const Get_Name();
-   const int get_Id();
+   string const Get_Name();
+   int const get_Id();
    void set_Name(string newname);
-   void set_wId(int newid);  
+   void set_wId(int newid);
 };
+
 class author : public person{
-    private: 
+    private:
     int numberofbooks;
     public:
     author();
-    author(string name,int id,int numberofbooks)
-    const int getnumberofbooks();
+    author(string name,int id,int numberofbooks);
+    int const getnumberofbooks();
     void setnumberofbooks(int count);
 };
 class customer : public person{
-    public: 
+    public:
     customer();
     customer(string name, int Id);
 };
@@ -36,13 +36,11 @@ class books{
     int id;
     double price;
     public:
-    book();
-    book(string title, int bookid,int authorid, double price);
-    const get_title(); 
-    const int get_book_id();
-    const int get_author_id();
-    const double get_price();
-    
+    books(string title, int bookid,int authorid, double price);
+    string const get_title();
+    int const get_book_id();
+    int const get_author_id();
+    double const get_price();
 
     void set_title(string title);
     void set_book_id(int id);
@@ -53,10 +51,10 @@ class sale : public books{
     public:
     sale();
     sale( int bookid,int quantity,int cutomerid,double price);
-    const int get_book_id();
-    const int get_quantity();
-    const int get_customerid();
-    const double get_price();
+    int const get_book_id();
+    int const get_quantity();
+    int const get_customerid();
+    double const get_price();
 
 
     void set_book_id(int id);
