@@ -47,32 +47,26 @@ int main()
         options option = askNicely();
         switch(option)
         {
-            //"1 > add new book"
             case addBook:
                 cout << "addBook" << '\n';
                 break;
 
-            //"2 > remove existing book"
             case removeBook:
                 cout << "removeBook" << '\n';
                 break;
 
-            // "3 > search for book"
             case searchBook:
                 cout << "findBook" << '\n';
                 break;
 
-           // "4 > search author"
             case searchAuthor:
                 cout << "findAuth" << '\n';
                 break;
 
-            // "5 > display all books"
             case listAllBooks:
                 cout << "listBooks" << '\n';
                 break;
 
-            // "6 > display all authors"
             case listAllAuthors:
                 cout << "listAuth" << '\n';
                 break;
