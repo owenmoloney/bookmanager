@@ -19,7 +19,7 @@ public:
     void setId(int newId);
 };
 
-// --- Author ---
+
 class Author : public Person {
 private:
     int numberOfBooks;
