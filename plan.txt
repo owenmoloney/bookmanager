@@ -1,0 +1,23 @@
+lets manage the adding book part
+
+so we receive a title and a link to github, then the useless details
+like writer and price (free btw). then we assign an incrementing id,
+it meants we start counting from 1.
+
+
+*books are the created object, with title, writer, price, id.
+
+ultimately it's a derived class, from a higher one with add book method
+and display book list method.
+
+*unordered_map is vital, it takes id and Book object as input
+
+archive
+|
+addBook()
+displayBooks()
+
+    books
+    |
+        writer
+        |
