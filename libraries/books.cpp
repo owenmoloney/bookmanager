@@ -5,11 +5,10 @@ using namespace std;
 
 
 class person{
-   protected:
+protected:
    string name;
    int id;
-   public:
-   person();
+public:
    person(string name, int id);
    string const Get_Name();
    int const get_Id();
@@ -19,9 +18,9 @@ class person{
 
 
 class author : public person{
-    private:
+private:
     int numberofbooks;
-    public:
+public:
     author();
     author(string name,int id,int numberofbooks);
     int const getnumberofbooks();
@@ -30,19 +29,19 @@ class author : public person{
 
 
 class customer : public person{
-    public:
+public:
     customer();
     customer(string name, int Id);
 };
 
 
 class books{
-    private:
+private:
     string name;
     string author;
     int id;
     double price;
-    public:
+public:
     books(string title, int bookid,int authorid, double price);
     string const get_title();
     int const get_book_id();
@@ -56,7 +55,7 @@ class books{
 
 
 class sale : public books{
-    public:
+public:
     sale();
     sale( int bookid,int quantity,int cutomerid,double price);
     int const get_book_id();
