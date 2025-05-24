@@ -30,7 +30,6 @@ public:
 
 class customer : public person{
 public:
-    customer();
     customer(string name, int Id);
 };
 
