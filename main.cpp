@@ -1,7 +1,7 @@
 #include <cstdlib>
 #include <iostream>
 using namespace std;
-
+//raul
 enum options {
     error = -1,
     quit = 0,
