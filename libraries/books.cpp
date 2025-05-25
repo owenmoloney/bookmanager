@@ -4,7 +4,7 @@
 #include <thread>
 using namespace std;
 
-
+/*
 class Person {
 protected:
     string name;
@@ -35,9 +35,7 @@ public:
 
 
     void setName(Person& person, string newName) { person.name = newName; }
-
     void setId(Person& person, unsigned int newId) { person.id = newId; }
-
 };
 
 
@@ -55,10 +53,9 @@ public:
 
 class Customer : public Person {
 public:
-    Customer();
     Customer(string name, unsigned int id);
 };
-
+*/
 
 class Book {
 private:
