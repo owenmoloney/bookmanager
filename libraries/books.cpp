@@ -12,7 +12,7 @@ protected:
     unsigned int id;
 
 public:
-    Person(string name="", int id=0) {
+    Person(string name="", unsigned int id=0) {
 
         this->name = name;
         this->id = id;
@@ -26,7 +26,7 @@ public:
     }
 
 
-    int getId(Person& person) const
+    unsigned int getId(Person& person) const
     {
         if (person.id == 0) { cout << "id does not exist for this person" << "\n"; return 0; }
         else
@@ -43,68 +43,71 @@ public:
 
 class Author : public Person {
 private:
-    int numberOfBooks;
+    unsigned int numberOfBooks;
 
 public:
-    Author(string name, int id, int numberOfBooks);
+    Author(string name, unsigned int id, unsigned int numberOfBooks);
 
-    int getNumberOfBooks() const;
-    void setNumberOfBooks(int count);
+    unsigned int getNumberOfBooks() const;
+    void setNumberOfBooks(unsigned int count);
 };
 
 
 class Customer : public Person {
 public:
     Customer();
-    Customer(string name, int id);
+    Customer(string name, unsigned int id);
 };
 
 
 class Book {
 private:
     string title;
-    int authorId;
-    int id;
-    double price;
+    string authorName;
+    unsigned int authorId;
+    unsigned int bookId;
+
+protected:
+    unsigned long int price;
 
 public:
-    Book();
-    Book(string title, int bookId, int authorId, double price);
+    Book(string title, string authorName, unsigned int authorId, unsigned int bookId, unsigned long int price);
 
     string getTitle() const;
-    int getBookId() const;
-    int getAuthorId() const;
+    string getAuthorName() const;
+    unsigned int getAuthorId() const;
+    unsigned int getBookId() const;
     double getPrice() const;
 
     void setTitle(string title);
-    void setBookId(int id);
-    void setAuthorId(int aid);
-    void setPrice(double price);
+    void setBookId(unsigned int id);
+    void setAuthorId(unsigned int aid);
+    void setPrice(unsigned long int price);
 };
 
-
-class Sale {
+/*
+// feels like were going too far, feel no need for this right now
+class Sale : private Book {
 private:
-    int bookId;
-    int quantity;
-    int customerId;
-    double price;
+    unsigned int bookId = 0;
+    unsigned int customerId = 0;
+    unsigned int saleId = 0;
+    unsigned int quantity = 0;
+    unsigned long int price = 0;
 
 public:
-    Sale();
-    Sale(int bookId, int quantity, int customerId, double price);
 
-    int getBookId() const;
-    int getQuantity() const;
-    int getCustomerId() const;
+    unsigned int getBookId() const;
+    unsigned int getQuantity() const;
+    unsigned int getCustomerId() const;
     double getPrice() const;
 
-    void setBookId(int id);
-    void setQuantity(int quantity);
-    void setCustomerId(int id);
+    void setBookId(unsigned int id);
+    void setQuantity(unsigned int quantity);
+    void setCustomerId(unsigned int id);
     void setPrice(double price);
 };
-
+*/
 int main()
 {
     Person* ptr;
