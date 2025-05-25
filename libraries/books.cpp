@@ -1,22 +1,43 @@
+#include <csignal>
 #include <iostream>
 #include <string>
+#include <thread>
 using namespace std;
 
 
 class Person {
 protected:
     string name;
-    int id;
+    unsigned int age;
+    unsigned int id;
 
 public:
-    Person();
-    Person(string name, int id);
+    Person(string name="", int id=0) {
 
-    string getName() const;
-    int getId() const;
+        this->name = name;
+        this->id = id;
+    }
 
-    void setName(string newName);
-    void setId(int newId);
+    string getName(Person& person) const
+    {
+        if (person.name == ""){ return "person doesn't exist"; }
+        else
+            return person.name;
+    }
+
+
+    int getId(Person& person) const
+    {
+        if (person.id == 0) { cout << "id does not exist for this person" << "\n"; return 0; }
+        else
+            return person.id;
+    }
+
+
+    void setName(Person& person, string newName) { person.name = newName; }
+
+    void setId(Person& person, unsigned int newId) { person.id = newId; }
+
 };
 
 
@@ -25,7 +46,6 @@ private:
     int numberOfBooks;
 
 public:
-    Author();
     Author(string name, int id, int numberOfBooks);
 
     int getNumberOfBooks() const;
@@ -85,3 +105,16 @@ public:
     void setPrice(double price);
 };
 
+int main()
+{
+    Person* ptr;
+    Person homie;
+    ptr = &homie;
+
+
+    ptr->setId(homie, 52);
+    ptr->setName(homie, "raul");
+    cout << ptr->getId(homie) << "\n";
+
+    return 0;
+}
