@@ -70,15 +70,31 @@ protected:
 public:
     Book(string title, string authorName, unsigned int authorId, unsigned int bookId, unsigned long int price);
 
-    string getTitle() const;
-    string getAuthorName() const;
-    unsigned int getAuthorId() const;
-    unsigned int getBookId() const;
-    double getPrice() const;
+    string getTitle() const {
+        return title;
+    }
+    string getAuthorName() const {
+        return authorName;
+    }
+    unsigned int getAuthorId() const {
+        return authorId;
+    }
+    unsigned int getBookId() const {
+        return bookId;
+    }
+    double getPrice() const {
+        return price;
+    }
 
-    void setTitle(string title);
-    void setBookId(unsigned int id);
-    void setAuthorId(unsigned int aid);
+    void setTitle(Book& book, string title) {
+        book.title = title;
+    }
+    void setBookId(Book& book, unsigned int bookId) {
+        book.bookId = bookId;
+    }
+    void setAuthorId(Book& book, blah){
+        book.authorName = authorName;
+    }
     void setPrice(unsigned long int price);
 };
 
