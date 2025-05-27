@@ -1,7 +1,7 @@
+#include <fstream>
 #include <csignal>
 #include <iostream>
 #include <string>
-#include <thread>
 using namespace std;
 
 /*
@@ -87,7 +87,7 @@ public:
         manage() {
             Book book;
             addBook(book);
-
+            saveBook(book);
         }
 
         void addBook(Book& book) {
@@ -104,6 +104,18 @@ public:
 
             cout << "enter thy price" << "\n";
             cin >> book.price;
+        }
+
+        void saveBook(Book& book) {
+            ofstream outputFile("book.dat", ios::out);
+
+            outputFile << book.getTitle() << "\n";
+            outputFile << book.getAuthorName() << "\n";
+            outputFile << book.getBookId() << "\n";
+            outputFile << book.getPrice() << "\n";
+            outputFile << "-" << "\n";
+
+            outputFile.close();
         }
 
         void updateTitle(Book& book, string title) {
