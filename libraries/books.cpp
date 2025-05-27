@@ -63,9 +63,9 @@ private:
     string authorName;
     unsigned int authorId;
     unsigned int id;
+    unsigned long int price;
 
 protected:
-    unsigned long int price;
 
 public:
 
