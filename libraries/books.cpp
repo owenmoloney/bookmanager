@@ -107,7 +107,7 @@ public:
         }
 
         void saveBook(Book& book) {
-            ofstream outputFile("book.dat", ios::out);
+            ofstream outputFile("book.dat", ios::app);
 
             outputFile << book.getTitle() << "\n";
             outputFile << book.getAuthorName() << "\n";
