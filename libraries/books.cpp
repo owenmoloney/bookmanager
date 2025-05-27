@@ -68,7 +68,6 @@ protected:
     unsigned long int price;
 
 public:
-    Book(string title, string authorName, unsigned int bookId, unsigned long int price);
 
     string getTitle() const {
         return title;
@@ -83,25 +82,39 @@ public:
         return price;
     }
 
-    void updateTitle(Book& book, string title) {
-        book.title = title;
-    }
-    void updateBookId(Book& book, unsigned int bookId) {
-        book.bookId = bookId;
-    }
-    void updateAuthorName(Book& book, string authorName){
-        book.authorName = authorName;
-    }
-    void updatePrice(Book& book, unsigned int price) {
-        book.price = price;
-    }
+    class manage  {
+    public:
+        manage(string title="", string authorName="", unsigned int bookId=0, unsigned long int price=0) {
+            Book* book;
+            book->title = title;
+            book->authorName = authorName;
+            book->bookId = bookId;
+            book->price = price;
+
+        }
+
+        bool addBook() {
+            cout << "add book yippie" << "\n";
+            return 1;
+        }
+
+        void updateTitle(Book& book, string title) {
+            book.title = title;
+        }
+        void updateBookId(Book& book, unsigned int bookId) {
+            book.bookId = bookId;
+        }
+        void updateAuthorName(Book& book, string authorName){
+            book.authorName = authorName;
+        }
+        void updatePrice(Book& book, unsigned int price) {
+            book.price = price;
+        }
+    private:
+    };
+
 };
 
-class manage {
-public:
-
-private:
-};
 
 /*
 // feels like were going too far, feel no need for this right now
@@ -126,16 +139,3 @@ public:
     void setPrice(double price);
 };
 */
-int main()
-{
-    Person* ptr;
-    Person homie;
-    ptr = &homie;
-
-
-    ptr->setId(homie, 52);
-    ptr->setName(homie, "raul");
-    cout << ptr->getId(homie) << "\n";
-
-    return 0;
-}

@@ -1,5 +1,6 @@
 #include <cstdlib>
 #include <iostream>
+#include "libraries/books.cpp"
 using namespace std;
 
 enum options {
@@ -44,11 +45,13 @@ int main()
     bool running = true;
     while (running)
     {
+        Book::manage book;
+
         options option = askNicely();
         switch(option)
         {
             case addBook:
-                cout << "addBook" << '\n';
+                book.addBook();
                 break;
 
             case removeBook:
