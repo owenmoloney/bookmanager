@@ -85,15 +85,13 @@ public:
     class manage  {
     public:
         manage() {
-            Book* book;
-            //book->title = title;
-            //book->authorName = authorName;
-            //book->id = id;
-            //book->price = price;
+            Book book;
+            addBook(book);
 
         }
 
-        bool addBook(Book& book) {
+        void addBook(Book& book) {
+
             cout << "enter thy book title" << "\n";
             // change this to getline when possible
             cin >> book.title;
@@ -106,8 +104,6 @@ public:
 
             cout << "enter thy price" << "\n";
             cin >> book.price;
-
-            return 1;
         }
 
         void updateTitle(Book& book, string title) {
