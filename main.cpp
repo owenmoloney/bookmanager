@@ -1,5 +1,6 @@
 #include <cstdlib>
 #include <iostream>
+#include "libraries/books.cpp"
 using namespace std;
 //raul ningggggggggggggger
 enum options {
@@ -44,37 +45,52 @@ int main()
     bool running = true;
     while (running)
     {
+
         options option = askNicely();
         switch(option)
         {
             case addBook:
-                cout << "addBook" << '\n';
+            {
+                Book::manage book;
                 break;
+            }
 
             case removeBook:
+            {
                 cout << "removeBook" << '\n';
                 break;
+            }
 
             case searchBook:
+            {
                 cout << "findBook" << '\n';
                 break;
+            }
 
             case searchAuthor:
+            {
                 cout << "findAuth" << '\n';
                 break;
+            }
 
             case listAllBooks:
+            {
                 cout << "listBooks" << '\n';
                 break;
+            }
 
             case listAllAuthors:
+            {
                 cout << "listAuth" << '\n';
                 break;
+            }
 
             case quit:
+            {
                 cout << "quit" << '\n';
                 running = false;
-                break;
+                    break;
+            }
 
             // err handle, or is it
             default:

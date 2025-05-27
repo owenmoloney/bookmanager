@@ -1,87 +1,161 @@
+#include <fstream>
+#include <csignal>
 #include <iostream>
 #include <string>
 using namespace std;
 
-
+/*
 class Person {
 protected:
     string name;
-    int id;
+    unsigned int age;
+    unsigned int id;
 
 public:
-    Person();
-    Person(string name, int id);
+    Person(string name="", unsigned int id=0) {
 
-    string getName() const;
-    int getId() const;
+        this->name = name;
+        this->id = id;
+    }
 
-    void setName(string newName);
-    void setId(int newId);
+    string getName(Person& person) const
+    {
+        if (person.name == ""){ return "person doesn't exist"; }
+        else
+            return person.name;
+    }
+
+
+    unsigned int getId(Person& person) const
+    {
+        if (person.id == 0) { cout << "id does not exist for this person" << "\n"; return 0; }
+        else
+            return person.id;
+    }
+
+
+    void setName(Person& person, string newName) { person.name = newName; }
+    void setId(Person& person, unsigned int newId) { person.id = newId; }
 };
 
 
 class Author : public Person {
 private:
-    int numberOfBooks;
+    unsigned int numberOfBooks;
 
 public:
-    Author();
-    Author(string name, int id, int numberOfBooks);
+    Author(string name, unsigned int id, unsigned int numberOfBooks);
 
-    int getNumberOfBooks() const;
-    void setNumberOfBooks(int count);
+    unsigned int getNumberOfBooks() const;
+    void setNumberOfBooks(unsigned int count);
 };
 
 
 class Customer : public Person {
 public:
-    Customer();
-    Customer(string name, int id);
+    Customer(string name, unsigned int id);
 };
-
+*/
 
 class Book {
 private:
     string title;
-    int authorId;
-    int id;
-    double price;
+    string authorName;
+    unsigned int authorId;
+    unsigned int id;
+    unsigned long int price;
+
+protected:
 
 public:
-    Book();
-    Book(string title, int bookId, int authorId, double price);
 
-    string getTitle() const;
-    int getBookId() const;
-    int getAuthorId() const;
-    double getPrice() const;
+    string getTitle() const {
+        return title;
+    }
+    string getAuthorName() const {
+        return authorName;
+    }
+    unsigned int getBookId() const {
+        return id;
+    }
+    double getPrice() const {
+        return price;
+    }
 
-    void setTitle(string title);
-    void setBookId(int id);
-    void setAuthorId(int aid);
-    void setPrice(double price);
+    class manage  {
+    public:
+        manage() {
+            Book book;
+            addBook(book);
+            saveBook(book);
+        }
+
+        void addBook(Book& book) {
+
+            cout << "enter thy book title" << "\n";
+            // change this to getline when possible
+            cin >> book.title;
+
+            cout << "enter thee author's name" << "\n";
+            cin >> book.authorName;
+
+            cout << "enter thee book ID" << "\n";
+            cin >> book.id;
+
+            cout << "enter thy price" << "\n";
+            cin >> book.price;
+        }
+
+        void saveBook(Book& book) {
+            ofstream outputFile("book.dat", ios::out);
+
+            outputFile << book.getTitle() << "\n";
+            outputFile << book.getAuthorName() << "\n";
+            outputFile << book.getBookId() << "\n";
+            outputFile << book.getPrice() << "\n";
+            outputFile << "-" << "\n";
+
+            outputFile.close();
+        }
+
+        void updateTitle(Book& book, string title) {
+            book.title = title;
+        }
+        void updateBookId(Book& book, unsigned int id) {
+            book.id = id;
+        }
+        void updateAuthorName(Book& book, string authorName){
+            book.authorName = authorName;
+        }
+        void updatePrice(Book& book, unsigned int price) {
+            book.price = price;
+        }
+    private:
+    };
+
 };
 
 
-class Sale {
+/*
+// feels like were going too far, feel no need for this right now
+class Sale : private Book {
 private:
-    int bookId;
-    int quantity;
-    int customerId;
-    double price;
+    unsigned int id = 0;
+    unsigned int customerId = 0;
+    unsigned int saleId = 0;
+    unsigned int quantity = 0;
+    unsigned long int price = 0;
 
 public:
-    Sale();
-    Sale(int bookId, int quantity, int customerId, double price);
 
-    int getBookId() const;
-    int getQuantity() const;
-    int getCustomerId() const;
+    unsigned int getBookId() const;
+    unsigned int getQuantity() const;
+    unsigned int getCustomerId() const;
     double getPrice() const;
 
-    void setBookId(int id);
-    void setQuantity(int quantity);
-    void setCustomerId(int id);
+    void setBookId(unsigned int id);
+    void setQuantity(unsigned int quantity);
+    void setCustomerId(unsigned int id);
     void setPrice(double price);
 };
-
+*/
