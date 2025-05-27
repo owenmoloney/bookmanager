@@ -62,7 +62,7 @@ private:
     string title;
     string authorName;
     unsigned int authorId;
-    unsigned int bookId;
+    unsigned int id;
 
 protected:
     unsigned long int price;
@@ -76,7 +76,7 @@ public:
         return authorName;
     }
     unsigned int getBookId() const {
-        return bookId;
+        return id;
     }
     double getPrice() const {
         return price;
@@ -84,25 +84,37 @@ public:
 
     class manage  {
     public:
-        manage(string title="", string authorName="", unsigned int bookId=0, unsigned long int price=0) {
+        manage() {
             Book* book;
-            book->title = title;
-            book->authorName = authorName;
-            book->bookId = bookId;
-            book->price = price;
+            //book->title = title;
+            //book->authorName = authorName;
+            //book->id = id;
+            //book->price = price;
 
         }
 
-        bool addBook() {
-            cout << "add book yippie" << "\n";
+        bool addBook(Book& book) {
+            cout << "enter thy book title" << "\n";
+            // change this to getline when possible
+            cin >> book.title;
+
+            cout << "enter thee author's name" << "\n";
+            cin >> book.authorName;
+
+            cout << "enter thee book ID" << "\n";
+            cin >> book.id;
+
+            cout << "enter thy price" << "\n";
+            cin >> book.price;
+
             return 1;
         }
 
         void updateTitle(Book& book, string title) {
             book.title = title;
         }
-        void updateBookId(Book& book, unsigned int bookId) {
-            book.bookId = bookId;
+        void updateBookId(Book& book, unsigned int id) {
+            book.id = id;
         }
         void updateAuthorName(Book& book, string authorName){
             book.authorName = authorName;
@@ -120,7 +132,7 @@ public:
 // feels like were going too far, feel no need for this right now
 class Sale : private Book {
 private:
-    unsigned int bookId = 0;
+    unsigned int id = 0;
     unsigned int customerId = 0;
     unsigned int saleId = 0;
     unsigned int quantity = 0;
