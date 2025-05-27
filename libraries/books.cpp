@@ -68,16 +68,13 @@ protected:
     unsigned long int price;
 
 public:
-    Book(string title, string authorName, unsigned int authorId, unsigned int bookId, unsigned long int price);
+    Book(string title, string authorName, unsigned int bookId, unsigned long int price);
 
     string getTitle() const {
         return title;
     }
     string getAuthorName() const {
         return authorName;
-    }
-    unsigned int getAuthorId() const {
-        return authorId;
     }
     unsigned int getBookId() const {
         return bookId;
@@ -86,16 +83,24 @@ public:
         return price;
     }
 
-    void setTitle(Book& book, string title) {
+    void updateTitle(Book& book, string title) {
         book.title = title;
     }
-    void setBookId(Book& book, unsigned int bookId) {
+    void updateBookId(Book& book, unsigned int bookId) {
         book.bookId = bookId;
     }
-    void setAuthorId(Book& book, blah){
+    void updateAuthorName(Book& book, string authorName){
         book.authorName = authorName;
     }
-    void setPrice(unsigned long int price);
+    void updatePrice(Book& book, unsigned int price) {
+        book.price = price;
+    }
+};
+
+class manage {
+public:
+
+private:
 };
 
 /*
