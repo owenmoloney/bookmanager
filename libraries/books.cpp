@@ -1,6 +1,7 @@
 #include <fstream>
 #include <csignal>
 #include <iostream>
+#include <set>
 #include <string>
 using namespace std;
 
@@ -85,27 +86,33 @@ public:
     class manage  {
     public:
         manage() {
-            Book book;
-            addBook(book);
-            saveBook(book);
+                //Empty Constructor because the previous one would call the book id and name function whenever you called the manage class
+                //However the manage class should contain more than the book ID and name function 
+
         }
 
         void addBook(Book& book) {
+            cin.ignore(); // flush leftover newline from previous input
+        
 
-            cout << "enter thy book title" << "\n";
-            // change this to getline when possible
-            cin >> book.title;
+        //Edits for bouth getline(): ensures full book titles and author names are read, even if they contain spaces
 
-            cout << "enter thee author's name" << "\n";
-            cin >> book.authorName;
+            cout << "Enter the Book Title" << "\n";
+            getline(cin, book.title);
+        
+            cout << "Enter the Author's name" << "\n";
+            getline(cin, book.authorName);
 
-            cout << "enter thee book ID" << "\n";
-            cin >> book.id;
-
-            cout << "enter thy price" << "\n";
+    
+        //Edit
+        //
+            book.id = getNextAvailableId();  // Automatically assigns unique IDs to new books starting from 001, using a file scan
+            cout << "Automatically assigned Book ID: " << book.id << "\n";
+        
+            cout << "Enter the price" << "\n";
             cin >> book.price;
         }
-
+        
         void saveBook(Book& book) {
             ofstream outputFile("book.dat", ios::app);
 
@@ -124,12 +131,208 @@ public:
         void updateBookId(Book& book, unsigned int id) {
             book.id = id;
         }
+        unsigned int getNextAvailableId() {
+            ifstream inputFile("book.dat");
+            unsigned int maxId = 0;
+            string title, authorName, separator;
+            unsigned int id;
+            unsigned long int price;
+        
+            while (getline(inputFile, title)) {
+                getline(inputFile, authorName);
+                inputFile >> id >> price;
+                inputFile.ignore(); // consume newline
+                getline(inputFile, separator); // consume '-'
+        
+                if (id > maxId) {
+                    maxId = id;
+                }
+            }
+        
+            inputFile.close();
+            return maxId + 1; // next ID
+        }
+        
         void updateAuthorName(Book& book, string authorName){
             book.authorName = authorName;
         }
         void updatePrice(Book& book, unsigned int price) {
             book.price = price;
         }
+
+        // Adition --> Adding RemoveBookById. For the next addition of the project.
+        // Efficient and safe book deletion by ID using temporary file swap
+        
+        void removeBookById(unsigned int idToRemove) {
+            ifstream inputFile("book.dat");
+            ofstream tempFile("temp.dat");
+        
+            string title, authorName;
+            unsigned int id;
+            unsigned long int price;
+            string separator;
+        
+            bool found = false;
+        
+            while (getline(inputFile, title)) {
+                getline(inputFile, authorName);
+                inputFile >> id;
+                inputFile >> price;
+                inputFile.ignore();  // consume newline
+                getline(inputFile, separator);  // consume '-'
+        
+                if (id == idToRemove) {
+                    found = true;
+                    cout << "Book with ID " << id << " removed.\n";
+                    continue; // skip writing to temp file
+                }
+        
+                // Write book to temp file
+                tempFile << title << "\n" << authorName << "\n"
+                         << id << "\n" << price << "\n" << "-\n";
+            }
+        
+            inputFile.close();
+            tempFile.close();
+        
+            remove("book.dat");
+            rename("temp.dat", "book.dat");
+        
+            if (!found) {
+                cout << "No book with ID " << idToRemove << " found.\n";
+            }
+        }
+        //Edit: Search for a specific book by title, didnt use the ID because the purpose of this would be to find a book you already know the name of and are just wondering if it is available
+        void searchBook(const string& titleToFind) {
+            ifstream inputFile("book.dat");
+            string title, authorName, separator;
+            unsigned int id;
+            unsigned long int price;
+            bool found = false;
+        
+            while (getline(inputFile, title)) {
+                getline(inputFile, authorName);
+                inputFile >> id >> price;
+                inputFile.ignore(); // consume newline
+                getline(inputFile, separator); // consume '-'
+        
+                if (title == titleToFind) {
+                    cout << "\n📚 << id << Book Found:\n";
+                    cout << "Title: " << title << "\n";
+                    cout << "Author: " << authorName << "\n";
+                    cout << "ID: " << id << "\n";
+                    cout << "Price: $" << price << "\n";
+                    found = true;
+                }
+            }
+        
+            if (!found) {
+                cout << "No book with the title \"" << titleToFind << "\" found.\n";
+            }
+        
+            inputFile.close();
+        }
+        
+        // Eddit:  Search for all books by a given author
+        void searchAuthor(const string& authorToFind) {
+            ifstream inputFile("book.dat");
+            string title, authorName, separator;
+            unsigned int id;
+            unsigned long int price;
+            bool found = false;
+        
+            while (getline(inputFile, title)) {
+                getline(inputFile, authorName);
+                inputFile >> id >> price;
+                inputFile.ignore(); // consume newline
+                getline(inputFile, separator); // consume '-'
+        
+                if (authorName == authorToFind) {
+                    cout << "\n🖊️ Book by Author Found:\n";
+                    cout << "Title: " << title << "\n";
+                    cout << "Author: " << authorName << "\n";
+                    cout << "ID: " << id << "\n";
+                    cout << "Price: $" << price << "\n";
+                    found = true;
+                }
+            }
+        
+            if (!found) {
+                cout << "No books by author \"" << authorToFind << "\" found.\n";
+            }
+        
+            inputFile.close();
+        }
+        
+        //Edit:Lists all books in the file in a structured format
+        void listAllBooks() {
+            ifstream inputFile("book.dat");
+            if (!inputFile) {
+                cout << "No books available.\n";
+                return;
+            }
+        
+            string title, authorName, separator;
+            unsigned int id;
+            unsigned long int price;
+            int count = 0;
+        
+            while (getline(inputFile, title)) {
+                getline(inputFile, authorName);
+                inputFile >> id >> price;
+                inputFile.ignore(); // consume newline
+                getline(inputFile, separator); // consume '-'
+        
+                cout << "\n📚 Book #" << ++count << ":\n";
+                cout << "Title: " << title << "\n";
+                cout << "Author: " << authorName << "\n";
+                cout << "ID: " << id << "\n";
+                cout << "Price: $" << price << "\n";
+            }
+        
+            if (count == 0) {
+                cout << "No books found in the database.\n";
+            }
+        
+            inputFile.close();
+        }
+
+        //Edit: Lists all unique authors using a set to avoid duplicates
+        void listAlllAuthors() {
+            ifstream inputFile("book.dat");
+            if (!inputFile) {
+                cout << "No authors available.\n";
+                return;
+            }
+        
+            set<string> authors;
+            string title, authorName, separator;
+            unsigned int id;
+            unsigned long int price;
+        
+            while (getline(inputFile, title)) {
+                getline(inputFile, authorName);
+                inputFile >> id >> price;
+                inputFile.ignore(); // consume newline
+                getline(inputFile, separator); // consume '-'
+        
+                if (!authorName.empty())
+                    authors.insert(authorName);
+            }
+        
+            if (authors.empty()) {
+                cout << "No authors found.\n";
+            } else {
+                cout << "\n🖋️ All Authors:\n";
+                for (const auto& name : authors) {
+                    cout << "- " << name << "\n";
+                }
+            }
+        
+            inputFile.close();
+        }
+        
+        
     private:
     };
 
@@ -159,3 +362,7 @@ public:
     void setPrice(double price);
 };
 */
+
+
+
+

@@ -2,7 +2,6 @@
 #include <iostream>
 #include "libraries/books.cpp"
 using namespace std;
-//raul ningggggggggggggger
 enum options {
     error = -1,
     quit = 0,
@@ -24,6 +23,7 @@ istream& operator>>(istream& is, options& option)
 options askNicely(){
 
     options choice;
+    while(true){
     cout << "choose action" << "\n";
     cout << "0 > quit" << "\n"
         << "1 > add new book" << "\n"
@@ -34,10 +34,20 @@ options askNicely(){
         << "6 > display all authors" << "\n";
     cin >> choice;
 
-    if (choice <  0 || choice > 6)
-        return error;
+    if (!cin) {
+        cin.clear(); cin.ignore(1000, '\n');
+        cout << "Invalid input. Please enter a number.\n";
+        continue;
+    }
+
+    if (choice < quit || choice > listAllAuthors) {
+        cout << "Invalid choice. Try again.\n";
+        continue;
+    }
+
 
     return choice;
+    }
 }
 
 int main()
@@ -51,37 +61,60 @@ int main()
         {
             case addBook:
             {
-                Book::manage book;
+                Book::manage manager;
+                Book newBook;
+                manager.addBook(newBook);
+                manager.saveBook(newBook);
                 break;
             }
-
+            
+            //Second Edit --> Make an effort to keep the user interaction seperate from the data handling
             case removeBook:
             {
-                cout << "removeBook" << '\n';
+                cout << "Enter ID of the book to remove: ";
+                unsigned int bookId;
+                cin >> bookId;
+                Book::manage manager;
+                manager.removeBookById(bookId);
                 break;
             }
+            
 
             case searchBook:
             {
-                cout << "findBook" << '\n';
+                cout << "Enter title of the book to search: ";
+                string title;
+                cin.ignore(); // flush leftover newline
+                getline(cin, title);
+                Book::manage manager;
+                manager.searchBook(title);
                 break;
             }
 
             case searchAuthor:
             {
-                cout << "findAuth" << '\n';
+                cout << "Enter author's name to search: ";
+                string author;
+                cin.ignore(); // flush leftover newline
+                getline(cin, author);
+                Book::manage manager;
+                manager.searchAuthor(author);
                 break;
             }
 
             case listAllBooks:
             {
-                cout << "listBooks" << '\n';
+                cout << "Library of All Books: " << '\n';
+                Book::manage manager;
+                manager.listAllBooks();
                 break;
             }
 
             case listAllAuthors:
             {
-                cout << "listAuth" << '\n';
+                cout << "List of Authors: " << '\n';
+                Book::manage manager;
+                manager.listAlllAuthors();
                 break;
             }
 
